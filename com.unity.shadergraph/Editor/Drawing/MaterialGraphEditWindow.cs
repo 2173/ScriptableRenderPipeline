@@ -12,7 +12,11 @@ using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Edge = UnityEditor.Experimental.UIElements.GraphView.Edge;
 using UnityEditor.Experimental.UIElements.GraphView;
+using UnityEditor.Importers;
 using UnityEngine.Experimental.UIElements;
+using Utf8Json;
+using Utf8Json.Resolvers;
+using Utf8Json.Unity;
 
 namespace UnityEditor.ShaderGraph.Drawing
 {
@@ -471,7 +475,8 @@ namespace UnityEditor.ShaderGraph.Drawing
                 var textGraph = File.ReadAllText(path, Encoding.UTF8);
                 graphObject = CreateInstance<GraphObject>();
                 graphObject.hideFlags = HideFlags.HideAndDontSave;
-                graphObject.graph = JsonUtility.FromJson(textGraph, graphType) as IGraph;
+//                graphObject.graph = JsonUtility.FromJson(textGraph, graphType) as IGraph;
+                graphObject.graph = JsonSerializer.NonGeneric.Deserialize(graphType, textGraph) as IGraph;
                 graphObject.graph.OnEnable();
                 graphObject.graph.ValidateGraph();
 

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEditor.Graphing;
+using UnityEditor.Importers;
+using Utf8Json;
 
 namespace UnityEditor.ShaderGraph
 {
     [Serializable]
+    [JsonFormatter(typeof(UnityObjectFormatter<SubGraph>))]
     public class SubGraph : AbstractMaterialGraph
         , IGeneratesBodyCode
         , IGeneratesFunction

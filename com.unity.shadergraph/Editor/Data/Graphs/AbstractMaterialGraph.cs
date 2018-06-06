@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEditor.Graphing;
 using UnityEditor.Graphing.Util;
+using UnityEditor.Importers;
+using Utf8Json;
 
 namespace UnityEditor.ShaderGraph
 {

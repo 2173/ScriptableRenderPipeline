@@ -1,6 +1,8 @@
 {
     "name": "Unity.ShaderGraph.Editor",
-    "references": [],
+    "references": [
+        "Utf8Json"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"

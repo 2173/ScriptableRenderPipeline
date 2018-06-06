@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEditor.Experimental.AssetImporters;
+using UnityEditor.Importers;
 using UnityEditor.ShaderGraph.Drawing;
+using Utf8Json;
+using Utf8Json.Resolvers;
+using Utf8Json.Unity;
 
 [ScriptedImporter(15, ShaderGraphExtension)]
 public class ShaderGraphImporter : ScriptedImporter
@@ -71,7 +75,9 @@ Shader ""Hidden/GraphErrorShader2""
         try
         {
             var textGraph = File.ReadAllText(path, Encoding.UTF8);
-            var graph = JsonUtility.FromJson<MaterialGraph>(textGraph);
+//            var graph = JsonUtility.FromJson<MaterialGraph>(textGraph);
+
+            var graph = JsonSerializer.Deserialize<MaterialGraph>(textGraph, CompositeResolver.Create(new IJsonFormatter[] {}, new [] {UnityResolver.Instance, JsonSerializer.DefaultResolver}));
             graph.LoadedFromDisk();
 
             if (!string.IsNullOrEmpty(graph.path))
